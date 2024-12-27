@@ -1,0 +1,8 @@
+# Dossiers générés par Eclipse
+.settings/
+bin/
+build/
+
+# Fichiers spécifiques à Eclipse
+.classpath
+.project
