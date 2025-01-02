@@ -4,24 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.io.Serializable;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
-@Table(name = "UTILISATEURS")
-public class Utilisateur implements Serializable {
+public class UtilisateurEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String name;
-    private String password;
+    private float solde;
 
-    public Utilisateur() {
-        super();
-    }
+    @OneToOne
+    @JoinColumn(name = "compte_id")
+    private Compte compte;
 
+    // Getters et setters
     public int getId() {
         return id;
     }
@@ -38,16 +37,19 @@ public class Utilisateur implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public float getSolde() {
+        return solde;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSolde(float solde) {
+        this.solde = solde;
     }
 
-    @Override
-    public String toString() {
-        return "Utilisateur [id=" + id + ", name=" + name + "]";
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
     }
 }

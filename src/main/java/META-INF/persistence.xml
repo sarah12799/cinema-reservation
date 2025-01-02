@@ -3,8 +3,8 @@
 
 <persistence-unit name="UP_CINEMA"> 
 <jta-data-source>java:/cinemaDS</jta-data-source> 
-<properties> <property name="hibernate.hbm2ddl.auto" value="update"/> 
+<properties> <property name="hibernate.hbm2ddl.auto" value="update"/>
+
 </properties>
  </persistence-unit>
   </persistence>
-  

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.cinema.entities.Film;
 import com.cinema.entities.SalleProg;
 import com.cinema.entities.Seance;
+import com.cinema.entities.UtilisateurEntity;
 import com.cinema.exception.PlusDePlaceException;
 import com.cinema.exception.SoldeInsuffisantException;
 import com.cinema.exception.SoldeNegatifException;
@@ -21,7 +22,7 @@ public Set<Film> findByPattern (String pattern);
 // Trouver un film à partir d'un id.
 public Film findFilm (int id);
 // Réserver une séance pour un utilisateur.
-public void reserve (Seance seance, Utilisateur u)
+public void reserve (Seance seance, UtilisateurEntity u)
 throws PlusDePlaceException, SoldeInsuffisantException,
 UserNotFoundException, SoldeNegatifException;
 public Set<SalleProg> getAllSalleProg ();
