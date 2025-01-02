@@ -24,16 +24,22 @@ public class Film implements Serializable {
     private String nom;
 	@OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST)
     private Set<SalleProg> salleProgs;
+	private String image ;
+	private String category;
 
 	public Film(String nom) {
 		this.nom=nom;
 	}
 	
-	public Film(int id_film, String nom) {
+	public Film(int id_film, String nom,String category,String image) {
 		super();
 		this.id_film = id_film;
 		this.nom = nom;
+		this.category=category;
+		this.image=image;
+
 	}
+	
 
     @Id
     
@@ -44,6 +50,7 @@ public class Film implements Serializable {
     public void setId(Integer id) {
         this.id_film = id;
     }
+    
 
     
     public String getNom() {
@@ -54,7 +61,21 @@ public class Film implements Serializable {
         this.nom = nom;
     }
 
-    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     
     
 
