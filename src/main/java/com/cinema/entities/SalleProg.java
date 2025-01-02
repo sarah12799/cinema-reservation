@@ -19,17 +19,19 @@ import jakarta.persistence.OneToOne;
 @Entity
 @Table(name = "SALLE_PROG")
 public class SalleProg implements Serializable {
+	
 	@ManyToOne
-    @JoinColumn(name = "film_id")
+    @JoinColumn(name = "id_film")
     private Film film;
 
-    @OneToOne(mappedBy="salleProg")//choix esclave est salleprog ici
+    @OneToOne(mappedBy="SALLE_PROG")//choix esclave est salleprog ici
     private Salle salle;
 
     @OneToMany(mappedBy = "salleProg", cascade = CascadeType.ALL)
     private Set<Seance> seances;
-
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_salleprog;
     
 
     public SalleProg() {
@@ -37,18 +39,17 @@ public class SalleProg implements Serializable {
     }
     
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     public Integer getId() {
-        return id;
+        return id_salleprog;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_salleprog = id;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "FILM_ID")
+   /** @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "FILM_ID")**/
     public Film getFilm() {
         return film;
     }

@@ -19,14 +19,14 @@ import jakarta.persistence.OneToOne;
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_salle;
 
     private String name;
     private String adress;
     private Integer capacite;
 
     @OneToOne
-    @JoinColumn(name = "salleProg_id")
+    @JoinColumn(name = "id_salleprog")
     private SalleProg salleProg;
     public Salle() {
         super();
@@ -39,11 +39,11 @@ public class Salle {
     }
     // Getters and setters
     public Integer getId() {
-        return id;
+        return id_salle;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_salle = id;
     }
 
     public String getName() {

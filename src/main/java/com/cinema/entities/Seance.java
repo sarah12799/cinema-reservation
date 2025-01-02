@@ -19,7 +19,7 @@ import java.util.Date;
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_seance;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaire;
@@ -28,7 +28,7 @@ public class Seance {
     private Float tarif;
 
     @ManyToOne
-    @JoinColumn(name = "salle_prog_id")
+    @JoinColumn(name = "id_salleprog")
     private SalleProg salleProg;
 
     // Constructeur par défaut
@@ -37,20 +37,20 @@ public class Seance {
     }
 
     // Constructeur paramétré
-    public Seance(Date horaire, Integer places, Float tarif, SalleProg salleProg) {
+    public Seance(Date horaire, Integer places, Float tarif, Integer id_seance) {
         this.horaire = horaire;
         this.places = places;
         this.tarif = tarif;
-        this.salleProg = salleProg;
+        this.id_seance = id_seance;
     }
 
     // Getters and setters
     public Integer getId() {
-        return id;
+        return id_seance;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_seance = id;
     }
 
     public Date getHoraire() {

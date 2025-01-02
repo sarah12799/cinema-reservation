@@ -28,7 +28,7 @@ import jakarta.persistence.Query;
 @Stateless
 public class CinemaBean implements Cinema {
 
-    @PersistenceContext
+	@PersistenceContext(unitName="UP_CINEMA")
     private EntityManager em;
     @EJB
     private Utilisateur utilisateurService;
@@ -53,37 +53,26 @@ public class CinemaBean implements Cinema {
         return em.find(Film.class, id);
     }
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    @Override
-    public void reserve(Seance seance, UtilisateurEntity utilisateur) throws PlusDePlaceException, SoldeInsuffisantException, UserNotFoundException, SoldeNegatifException {
-        // Authentifier l'utilisateur
-        try {
-            utilisateurService.init(utilisateur.getName(), utilisateur.getCompte().getPassword());
-        } catch (UserNotFoundException e) {
-            throw new UserNotFoundException("Utilisateur non trouvé ou informations d'identification incorrectes.");
-        }
-
+    public void reserve(Seance seance, Utilisateur utilisateur) throws PlusDePlaceException, SoldeInsuffisantException, UserNotFoundException, SoldeNegatifException {
         // Vérifier si la séance a encore des places disponibles
         if (seance.getPlaces() <= 0) {
             throw new PlusDePlaceException();
         }
 
         // Vérifier si l'utilisateur a un solde suffisant
-        float tarif = seance.getTarif();
-        float soldeUtilisateur = utilisateur.getCompte().getSolde();
+        float tarif = getTarif();
+        float soldeUtilisateur = utilisateur.solde();
         if (soldeUtilisateur < tarif) {
             throw new SoldeInsuffisantException();
         }
-        try {
-            utilisateurService.debite(tarif);
-        } catch (SoldeNegatifException e) {
-            throw new SoldeNegatifException("Solde insuffisant pour effectuer cette réservation.");
-        }
+
+        // Débiter le compte de l'utilisateur
+        utilisateur.debite(tarif);
 
         // Réserver la séance
         seance.setPlaces(seance.getPlaces() - 1);
         em.merge(seance);
-        }
+    }
     @Override
     public Set<SalleProg> getAllSalleProg() {
         Query q = em.createQuery("SELECT sp FROM SalleProg sp", SalleProg.class);
@@ -94,7 +83,7 @@ public class CinemaBean implements Cinema {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public Film createFilm(String name) {
-        Film film = new Film();
+        Film film = new Film(name);
         film.setNom(name);
         em.persist(film);
         return film;
@@ -109,6 +98,6 @@ public class CinemaBean implements Cinema {
     @Override
     public float getTarif() {
         return 10.0f; // Valeur par défaut
-    }
+    }**/
 }
 

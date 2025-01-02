@@ -15,7 +15,7 @@ import jakarta.persistence.Query;
 
 @Stateful
 public class UtilisateurBean implements Utilisateur {
-    @PersistenceContext
+	@PersistenceContext(unitName="UP_CINEMA")
     private EntityManager em;
     private int user_id;
 

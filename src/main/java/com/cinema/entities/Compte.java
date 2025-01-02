@@ -21,10 +21,12 @@ import jakarta.persistence.Column;
     @NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :cid")
 })
 public class Compte implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int compte_id;
 
     @Column(name = "NAME")
     private String name;
@@ -43,13 +45,23 @@ public class Compte implements Serializable {
     public Compte() {
         super();
     }
+    public Compte(String nom) {
+        this.name=nom;
+    }
+    public Compte(int id, String name, String password, float solde) {
+		super();
+		this.compte_id = id;
+		this.name = name;
+		this.password = password;
+		this.solde = solde;
+	}
 
     public int getId() {
-        return id;
+        return compte_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.compte_id = id;
     }
 
     public String getName() {
@@ -76,13 +88,10 @@ public class Compte implements Serializable {
         this.solde = solde;
     }
 
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Compte[id=").append(id)
-          .append(", name=").append(name)
-          .append(", solde=").append(solde)
-          .append("]");
+        sb.append("Compte[id=").append(getId()).append(", name=").append(getName()).append("]");
         return sb.toString();
     }
+    
 }

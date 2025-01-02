@@ -22,9 +22,9 @@ public Set<Film> findByPattern (String pattern);
 // Trouver un film à partir d'un id.
 public Film findFilm (int id);
 // Réserver une séance pour un utilisateur.
-public void reserve (Seance seance, UtilisateurEntity u)
+/*public void reserve (Seance seance, Utilisateur u)
 throws PlusDePlaceException, SoldeInsuffisantException,
-UserNotFoundException, SoldeNegatifException;
+UserNotFoundException, SoldeNegatifException;*/
 public Set<SalleProg> getAllSalleProg ();
 public Film createFilm (String name);
 public void update (Film f);
