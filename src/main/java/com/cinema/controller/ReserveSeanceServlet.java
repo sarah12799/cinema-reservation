@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.cinema.entities.Seance;
-import com.cinema.entities.UtilisateurEntity;
+
 import com.cinema.exception.PlusDePlaceException;
 import com.cinema.exception.SoldeInsuffisantException;
 import com.cinema.exception.SoldeNegatifException;

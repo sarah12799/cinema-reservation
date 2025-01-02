@@ -6,10 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
+
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToOne;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
@@ -37,10 +37,7 @@ public class Compte implements Serializable {
     @Column(name = "SOLDE")
     private float solde;
     
-    @OneToOne(mappedBy = "compte")
-    @MapsId
-    private UtilisateurEntity utilisateur;
-
+   
 
     public Compte() {
         super();

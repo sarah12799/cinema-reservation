@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import com.cinema.entities.Film;
 import com.cinema.entities.SalleProg;
 import com.cinema.entities.Seance;
-import com.cinema.entities.UtilisateurEntity;
 import com.cinema.service.Utilisateur;
+
 import com.cinema.exception.PlusDePlaceException;
 import com.cinema.exception.SoldeInsuffisantException;
 import com.cinema.exception.SoldeNegatifException;
@@ -98,6 +98,6 @@ public class CinemaBean implements Cinema {
     @Override
     public float getTarif() {
         return 10.0f; // Valeur par défaut
-    }**/
+    }
 }
 

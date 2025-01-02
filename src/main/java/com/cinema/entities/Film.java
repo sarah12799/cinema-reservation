@@ -60,6 +60,6 @@ public class Film implements Serializable {
 
     @Override
     public String toString() {
-        return "Film [id=" + id + ", nom=" + nom + ", salleProgs=" + salleProgs + "]";
+        return "Film [id=" + id_film + ", nom=" + nom + ", salleProgs=" + salleProgs + "]";
     }
 }

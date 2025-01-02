@@ -1,9 +1,9 @@
 package com.cinema.entities;
 
-
-
 import java.io.Serializable;
 import java.util.Set;
+
+import jakarta.persistence.Column;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -13,33 +13,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "SALLE_PROG")
 public class SalleProg implements Serializable {
 	
-	@ManyToOne
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private Integer id_salleprog;
+
+    @ManyToOne
     @JoinColumn(name = "id_film")
     private Film film;
 
-    @OneToOne(mappedBy="SALLE_PROG")//choix esclave est salleprog ici
+    @OneToOne
+    @JoinColumn (name="id_salle")
     private Salle salle;
+    
+    /**private Salle salle;
+    @OneToOne(mappedBy = "salleProg")*/
 
     @OneToMany(mappedBy = "salleProg", cascade = CascadeType.ALL)
     private Set<Seance> seances;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_salleprog;
-    
+
 
     public SalleProg() {
         super();
     }
-    
 
-    
     public Integer getId() {
         return id_salleprog;
     }
@@ -48,8 +52,6 @@ public class SalleProg implements Serializable {
         this.id_salleprog = id;
     }
 
-   /** @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "FILM_ID")**/
     public Film getFilm() {
         return film;
     }
@@ -57,6 +59,7 @@ public class SalleProg implements Serializable {
     public void setFilm(Film film) {
         this.film = film;
     }
+
     public Salle getSalle() {
         return salle;
     }
@@ -77,7 +80,7 @@ public class SalleProg implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + ((id_salleprog == null) ? 0 : id_salleprog.hashCode());
         return result;
     }
 
@@ -90,14 +93,16 @@ public class SalleProg implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         SalleProg other = (SalleProg) obj;
-        if (id != other.id)
+        if (id_salleprog == null) {
+            if (other.id_salleprog != null)
+                return false;
+        } else if (!id_salleprog.equals(other.id_salleprog))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "SalleProg [id=" + id + ", film=" + film + "]";
+        return "SalleProg [id=" + id_salleprog + ", film=" + film + "]";
     }
 }
-
